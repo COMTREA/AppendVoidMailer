@@ -1,6 +1,6 @@
 // Connection details for CacheDB
 module.exports.cachedb = {
-    ip: '',
+    ip: 'localhost', // If running Avatar on this machine, localhost is fine
     port: '4972',
     pmdb: 'AVPM'
 }
@@ -14,9 +14,9 @@ module.exports.login = {
 // Email details
 module.exports.mail = {
     service: 'outlook', // outlook, gmail, etc  full list: https://nodemailer.com/smtp/well-known/
-    user: '',
+    user: '', // email sending the mail (we use our admin account)
     pass:'',
-    receiver: ''
+    receiver: '' // email that receives the sent mail
 };
 
 // Mail settings

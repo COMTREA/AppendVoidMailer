@@ -13,6 +13,9 @@ npm i windows-build-tools
 npm i
 ```
 
+## Configuration
+Rename default-config.js to config.js. You will need to enter your details into the config.js file. Please read the comments inside for what to fill in.
+
 ## Running Software
 * Open Powershell/Command Prompt
 * Enter 'node mailer.js' to run
