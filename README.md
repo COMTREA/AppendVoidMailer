@@ -8,10 +8,10 @@ Monitors the append and void tables in Avatar. When new ones come in via the "Ap
 
 ### Manual Install Commands
 If you want to manually run or have to for some reason
-'''
+```
 * npm i windows-build-tools
 * npm i
-'''
+```
 
 ## Running Software
 * Open Powershell/Command Prompt
