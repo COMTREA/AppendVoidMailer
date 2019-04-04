@@ -1,5 +1,7 @@
 OLD
 log
 out
+node_modules
 state.json
 config.js
+mailQueue.json

@@ -21,6 +21,10 @@ const SQL = {
 // A array with all of our queued up emails to be sent. Appends/Voids are added and ONLY removed when successfully sent
 var mailQueue = [];
 
+if (fs.existsSync('./mailQueue.json')) {
+    mailQueue = JSON.parse(fs.readFileSync('./mailQueue.json'));
+}
+
 // Create mail transporter
 const mail = mailer.createTransport({
     service: config.mail.service,
@@ -65,13 +69,23 @@ async function MailQueuedItems() {
 
         mail.sendMail(mailOpts, function(err, info) {
             if (err) {
-                mailQueue.push(item);
                 Log(item.type+' failed to send. Added back to queue.');
             } else {
                 mailQueue.splice(mailQueue.indexOf(item),1);
                 Log(item.type+' successfully sent');
             }
+
+            UpdateQueueFile();
         });
+    });
+}
+
+// Update our queuefile mailQueue.json with current mailQueue data
+async function UpdateQueueFile() {
+    fs.writeFile('./mailQueue.json', JSON.stringify(mailQueue), function(err) {
+        if (err) { 
+            Log('ERROR WRITING QUEUE: '+err);
+        }
     });
 }
 
@@ -176,6 +190,8 @@ async function AddToQueue(type, data) {
             mailQueue.push({ subjectLine:  subjectLine, body: html, type });
         });
     });
+
+    UpdateQueueFile();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
